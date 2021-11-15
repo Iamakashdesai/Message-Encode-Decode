@@ -13,10 +13,17 @@ Label(root, text ='ENCODE DECODE', font = 'arial 20 bold').pack()
 
 Label(root, text ='DataFlair', font = 'arial 20 bold').pack(side =BOTTOM)
 
+
+#Define variables
+
+
 Text = StringVar()
 private_key = StringVar()
 mode = StringVar()
 Result = StringVar()
+
+
+#Function to encode
 
 
 def Encode(key,message):
@@ -27,6 +34,11 @@ def Encode(key,message):
         enc.append(chr((ord(message[i]) + ord(key_c)) % 256))
     return base64.urlsafe_b64encode("".join(enc).encode()).decode()
 
+  
+  
+  #Function to decode
+
+  
 def Decode(key,message):
     dec=[]
     message = base64.urlsafe_b64decode(message).decode()
@@ -36,6 +48,12 @@ def Decode(key,message):
         dec.append(chr((256 + ord(message[i])- ord(key_c)) % 256))
     return "".join(dec)
 
+  
+  
+  
+  #Function to set mode
+
+  
 def Mode():
     if(mode.get() == 'e'):
         Result.set(Encode(private_key.get(), Text.get()))
@@ -54,6 +72,9 @@ def Reset():
     mode.set("")
     Result.set("")
 
+    
+    #Labels and Buttons
+    
 Label(root, font= 'arial 12 bold', text='MESSAGE').place(x= 60,y=60)
 Entry(root, font = 'arial 10', textvariable = Text, bg = 'ghost white').place(x=290, y = 60)
 
